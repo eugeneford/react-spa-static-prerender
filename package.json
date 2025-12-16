@@ -1,0 +1,39 @@
+{
+  "name": "react-spa-static-prerender",
+  "version": "0.0.0-development",
+  "description": "A simple CLI tool to prerender React SPA routes into static HTML files for better SEO and faster initialization",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "react-spa-static-prerender": "bin/cli.js"
+  },
+  "keywords": [
+    "react",
+    "prerender",
+    "static-site-generator",
+    "spa",
+    "html",
+    "seo",
+    "ssg",
+    "ssr",
+    "cli"
+  ],
+  "author": {
+    "name": "Eugene Gusarov",
+    "email": "eugene@gusarov.co"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^24.10.1",
+    "serve": "^14.2.4"
+  },
+  "engines": {
+    "node": ">=20.18.0"
+  },
+  "devDependencies": {
+    "semantic-release": "^24.2.9"
+  }
+}
