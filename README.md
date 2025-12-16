@@ -1,6 +1,6 @@
 [![npm version](https://img.shields.io/npm/v/react-spa-static-prerender.svg)](https://www.npmjs.com/package/react-spa-static-prerender)
 [![MIT license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-# react-static-prerender
+# react-spa-static-prerender
 
 A lightweight CLI tool that converts your React SPA into static HTML files, each acting as a standalone entry point.
 
