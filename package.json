@@ -31,7 +31,7 @@
     "serve": "^14.2.4"
   },
   "engines": {
-    "node": ">=20.18.0"
+    "node": ">=24.11.1"
   },
   "devDependencies": {
     "semantic-release": "^24.2.9"
