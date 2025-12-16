@@ -258,19 +258,19 @@ async function getBlogRoutes() {
 2. Run the prerender command to generate static HTML pages.
 
 ```
-npx react-static-prerender
+npx react-spa-static-prerender
 ```
 
 If you want to automatically build before prerendering:
 
 ```
-npx react-static-prerender --with-build
+npx react-spa-static-prerender --with-build
 ```
 
 For debugging server issues:
 
 ```
-npx react-static-prerender --debug
+npx react-spa-static-prerender --debug
 ```
 
 **(Optional)** Add an npm script to simplify future runs:
