@@ -357,7 +357,7 @@ static-pages/
 
 ## Requirements
 
-- **Node.js 24 or higher**
+- **Node.js 20.18.0 or higher**
 - React app build ready for prerendering or run the command with --with-build flag
 
 ## Troubleshooting
