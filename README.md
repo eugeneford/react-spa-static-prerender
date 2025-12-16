@@ -1,4 +1,4 @@
-[![npm version](https://img.shields.io/npm/v/react-spa-static-prerender.svg)](https://www.npmjs.com/package/react-static-prerender)
+[![npm version](https://img.shields.io/npm/v/react-spa-static-prerender.svg)](https://www.npmjs.com/package/react-spa-static-prerender)
 [![MIT license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 # react-static-prerender
 
