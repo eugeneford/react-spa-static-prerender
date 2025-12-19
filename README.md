@@ -296,6 +296,7 @@ npm run prerender
 | `serveDir` | `string` | `"build"` | Directory containing your built React app |
 | `buildCommand` | `string` | `"npm run build"` | Command to build your app when using `--with-build` |
 | `flatOutput` | `boolean` | `false` | Output structure: `true` = `about.html`, `false` = `about/index.html` |
+| `keepCSRAssets` | `string` | `false` | Preserve original build assets like `index.html`. Note: pre-rendered routes overwrite matches |
 | `skipPrerenderSelector` | `string` | undefined | Optional CSS selector for elements to skip during prerender (e.g., '[data-skip-prerender]') |
 | `viewport` | `{ width: number, height: number }` | undefined | Optional viewport dimensions for Puppeteer (default: 800x600) |
 

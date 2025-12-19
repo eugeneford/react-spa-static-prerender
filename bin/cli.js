@@ -42,15 +42,15 @@ async function loadConfig() {
 
     const configUrl = `file://${configPath}`;
     const configModule = await import(configUrl);
-    
+
     const config = typeof configModule.default === "function"
-        ? await configModule.default()
-        : configModule.default;
-        
+      ? await configModule.default()
+      : configModule.default;
+
     if (!config) {
       throw new Error('Config file must export a configuration object or function');
     }
-    
+
     return config;
   } catch (error) {
     if (error.code === 'ERR_REQUIRE_ESM' || error.message.includes('Unexpected token')) {
@@ -79,7 +79,7 @@ async function loadConfig() {
       `);
       process.exit(1);
     }
-    
+
     if (error.message.includes('Cannot resolve module')) {
       console.error(`
         ❌ Module resolution error in config file: ${error.message}
@@ -90,7 +90,7 @@ async function loadConfig() {
       `);
       process.exit(1);
     }
-    
+
     console.error(`❌ Error loading configuration: ${error.message}`);
     process.exit(1);
   }
@@ -105,7 +105,7 @@ async function pathExists(filePath) {
   }
 }
 
-async function copyBuildAssets(serveDir, outDir) {
+async function copyBuildAssets(serveDir, outDir, keepCSRAssets) {
   const buildDir = path.resolve(process.cwd(), serveDir);
   const outDirFull = path.resolve(process.cwd(), outDir);
 
@@ -122,6 +122,8 @@ async function copyBuildAssets(serveDir, outDir) {
         await copyRecursive(srcPath, destPath);
       }
     } else if (!src.endsWith(".html")) {
+      await fs.copyFile(src, dest);
+    } else if (keepCSRAssets && src.endsWith(".html")) {
       await fs.copyFile(src, dest);
     }
   }
@@ -165,7 +167,7 @@ async function main() {
       const hasIndex = await pathExists(path.join(buildDir, "index.html"));
       if (!hasIndex) {
         console.error(
-            "❌ Build folder not found. Run `npm run build` or use --with-build."
+          "❌ Build folder not found. Run `npm run build` or use --with-build."
         );
         process.exit(1);
       }
@@ -178,9 +180,9 @@ async function main() {
     } catch (err) {
     }
 
-    await prerender(config);
+    await copyBuildAssets(config.serveDir || "build", config.outDir || "static-pages", config.keepCSRAssets || false);
 
-    await copyBuildAssets(config.serveDir || "build", config.outDir || "static-pages");
+    await prerender(config);
 
     console.log("🎉 Prerendering completed successfully!");
 
