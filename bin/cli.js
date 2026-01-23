@@ -3,7 +3,7 @@
 import path from "path";
 import fs from "fs/promises";
 import { spawn } from "child_process";
-import { prerender } from "../src/index.js";
+import { prerender, generateSitemap } from "../src/index.js";
 
 async function loadConfig() {
   const configPath = path.resolve(process.cwd(), "prerender.config.js");
@@ -183,6 +183,10 @@ async function main() {
     await copyBuildAssets(config.serveDir || "build", config.outDir || "static-pages", config.keepCSRAssets || false);
 
     await prerender(config);
+
+    if (config.generateSitemap) {
+      await generateSitemap(config);
+    }
 
     console.log("🎉 Prerendering completed successfully!");
 

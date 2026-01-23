@@ -69,6 +69,36 @@ async function killProcessGroup(childProcess) {
   });
 }
 
+export async function generateSitemap(config) {
+  const {
+    routes = [],
+    outDir = "static-pages",
+    origin = "",
+  } = config;
+
+  const outDirPath = path.resolve(process.cwd(), outDir);
+  const today = new Date().toISOString().split("T")[0];
+
+  const urlEntries = routes.map((route) => {
+    // Transform /home to / for the sitemap
+    const normalizedRoute = route === "/home" ? "/" : route;
+    const loc = `${origin}${normalizedRoute}`;
+    return `  <url>
+    <loc>${loc}</loc>
+    <lastmod>${today}</lastmod>
+  </url>`;
+  });
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urlEntries.join("\n")}
+</urlset>`;
+
+  await fs.mkdir(outDirPath, { recursive: true });
+  await fs.writeFile(path.join(outDirPath, "sitemap.xml"), sitemap);
+  console.log(`✅ Generated sitemap.xml with ${routes.length} URLs`);
+}
+
 export async function prerender(config) {
   const {
     routes = [],
